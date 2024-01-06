@@ -4,9 +4,14 @@ import pandas as pd
 import re
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+from streamlit_extras.add_vertical_space import add_vertical_space
+
+
+#loading the model and the vectorizer
 model = joblib.load('fakenews.pkl')
 vector = joblib.load('vector.pkl')
 
+#function for text preprocessing
 def preprocess(text):
     ps = PorterStemmer()
 
@@ -22,7 +27,21 @@ def preprocess(text):
 
 
 st.set_page_config("fake news prediction",layout="centered")
-st.header("this is a fake news prediction application to classsify the fake newsa and real news")
+with st.sidebar:
+    st.title('FAKE NEWS PREDICTION')
+    st.markdown('''
+    ## About
+    This is an app to predict whether the given news in fake or not using:
+                
+    -streamlit
+    ,logistic regression as the classification model
+               
+    
+ 
+    ''')
+    add_vertical_space(5)
+    st.write('made by varun m s')
+    st.write('varunmsaji01@gmail.com')
 
 input = st.text_input("enter the article")
 button = st.button('submit')
